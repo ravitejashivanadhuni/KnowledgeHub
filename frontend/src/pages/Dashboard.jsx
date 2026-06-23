@@ -1,22 +1,40 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import StatCard from "../components/Statcard";
 import experts from "../data/experts";
 import articles from "../data/articles";
 import Sidebar from "../components/Sidebar";
+import MainLayout from "../layouts/MainLayout";
 
 function Dashboard() {
+    const [stats, setStats] = useState({
+  articles: 0,
+  questions: 0,
+  experts: 0,
+});
+
+useEffect(() => {
+  axios
+    .get("http://127.0.0.1:8000/api/dashboard")
+    .then((response) => {
+      setStats(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, []);
     return (
-        <div className="min-h-screen bg-gray-100 p-6">
+        <MainLayout>
             <div className="flex">
-                <Sidebar />
                 <div className="ml-64">
                     <h1 className="text-3xl font-bold mb-6">
                 KnowledgeHub Dashboard
             </h1>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <StatCard title="Total Articles" value="25" />
-                <StatCard title="Total Questions" value="12" />
-                <StatCard title="Experts" value="8" />
+<StatCard title="Total Articles" value={stats.articles} />
+<StatCard title="Total Questions" value={stats.questions} />
+<StatCard title="Experts" value={stats.experts} />
             </div>
             <div className="mt-8">
                 <h2 className="text-2xl font-semibold mb-4">
@@ -72,7 +90,7 @@ function Dashboard() {
 </div>
         </div>
             </div>
-        </div>
+        </MainLayout>
     );
 }
 

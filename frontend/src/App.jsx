@@ -5,6 +5,7 @@ import Articles from "./pages/Articles";
 import Questions from "./pages/Questions";
 import Experts from "./pages/Experts";
 import Leaderboard from "./pages/Leaderboard";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/questions" element={<Questions />} />
         <Route path="/experts" element={<Experts />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   );

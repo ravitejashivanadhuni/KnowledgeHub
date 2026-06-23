@@ -36,6 +36,12 @@ function Sidebar() {
             Leaderboard
           </div>
         </Link>
+        <Link
+  to="/admin"
+  className="block p-3 rounded-lg hover:bg-slate-800"
+>
+  Admin
+</Link>
       </nav>
     </div>
   );
