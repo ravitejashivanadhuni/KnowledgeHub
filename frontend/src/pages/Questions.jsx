@@ -1,6 +1,7 @@
 import MainLayout from "../layouts/MainLayout";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Questions() {
     const [showForm, setShowForm] = useState(false);
@@ -103,10 +104,11 @@ const [newQuestion, setNewQuestion] = useState({
 )}
       <div className="space-y-4">
         {questions.map((question) => (
-          <div
-            key={question.id}
-            className="bg-white rounded-xl shadow p-5"
-          >
+<Link
+  key={question.id}
+  to={`/questions/${question.id}`}
+  className="block bg-white rounded-xl shadow p-5 hover:shadow-lg transition"
+>
             <h2 className="text-xl font-semibold">
               {question.title}
             </h2>
@@ -124,7 +126,7 @@ const [newQuestion, setNewQuestion] = useState({
                 {question.answers} Answers
               </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </MainLayout>
