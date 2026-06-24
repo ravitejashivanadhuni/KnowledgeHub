@@ -10,6 +10,7 @@ use App\Models\Article;
 use App\Models\Question;
 use App\Models\User;
 use App\Models\Answer;
+use App\Http\Controllers\AuthController;
 
 Route::get('/dashboard', function () {
     return response()->json([
@@ -40,4 +41,11 @@ Route::get(
 Route::delete(
     '/admin/answers/{id}',
     [AdminController::class, 'deleteAnswer']
+);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->get(
+    '/me',
+    [AuthController::class, 'me']
 );

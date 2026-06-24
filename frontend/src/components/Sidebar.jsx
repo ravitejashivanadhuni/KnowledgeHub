@@ -7,7 +7,7 @@ function Sidebar() {
       </h1>
 
       <nav className="space-y-3">
-        <Link to="/">
+        <Link to="/dashboard">
           <div className="p-3 rounded-lg bg-slate-800 cursor-pointer">
             Dashboard
           </div>

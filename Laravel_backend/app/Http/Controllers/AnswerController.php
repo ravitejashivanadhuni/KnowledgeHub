@@ -16,7 +16,7 @@ class AnswerController extends Controller
 
         $answer = Answer::create([
             'question_id' => $validated['question_id'],
-            'user_id' => 1, // temporary demo user
+            'user_id' => $request->user()->id,
             'answer' => $validated['answer'],
         ]);
 

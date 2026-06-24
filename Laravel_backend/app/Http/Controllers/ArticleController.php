@@ -35,7 +35,7 @@ class ArticleController extends Controller
         'title' => $validated['title'],
         'content' => $validated['content'],
         'category' => $validated['category'],
-        'user_id' => 1, // temporary demo user
+        'user_id' => $request->user()->id,
         'status' => 'approved',
     ]);
 

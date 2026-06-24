@@ -5,6 +5,7 @@ import experts from "../data/experts";
 import articles from "../data/articles";
 import Sidebar from "../components/Sidebar";
 import MainLayout from "../layouts/MainLayout";
+import { useAuth } from "../context/AuthContext";
 
 function Dashboard() {
     const [stats, setStats] = useState({
@@ -12,7 +13,10 @@ function Dashboard() {
   questions: 0,
   experts: 0,
 });
+const { user, loading } = useAuth();
 
+console.log("User:", user);
+console.log("Loading:", loading);
 useEffect(() => {
   axios
     .get("http://127.0.0.1:8000/api/dashboard")

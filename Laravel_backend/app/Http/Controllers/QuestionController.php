@@ -34,7 +34,7 @@ class QuestionController extends Controller
     $question = Question::create([
         'title' => $validated['title'],
         'description' => $validated['description'],
-        'user_id' => 4, // temporary demo user
+        'user_id' => $request->user()->id,
         'status' => 'open',
     ]);
 
