@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 import MainLayout from "../layouts/MainLayout";
 
 function ArticleDetails() {
@@ -8,8 +8,8 @@ function ArticleDetails() {
   const [article, setArticle] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/api/articles/${id}`)
+    api
+      .get(`/articles/${id}`)
       .then((response) => {
         setArticle(response.data);
       })

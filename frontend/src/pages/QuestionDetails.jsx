@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 import MainLayout from "../layouts/MainLayout";
 
 function QuestionDetails() {
@@ -9,8 +9,8 @@ function QuestionDetails() {
   const [newAnswer, setNewAnswer] = useState("");
 
 const loadQuestion = () => {
-  axios
-    .get(`http://127.0.0.1:8000/api/questions/${id}`)
+  api
+    .get(`/questions/${id}`)
     .then((response) => {
       setQuestion(response.data);
     })
@@ -63,13 +63,10 @@ useEffect(() => {
       if (!newAnswer.trim()) return;
 
       try {
-        await axios.post(
-          "http://127.0.0.1:8000/api/answers",
-          {
-            question_id: question.id,
-            answer: newAnswer,
-          }
-        );
+        await api.post("/answers", {
+          question_id: question.id,
+          answer: newAnswer,
+        });
 
         setNewAnswer("");
 

@@ -6,6 +6,9 @@ use App\Models\Article;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class AdminController extends Controller
 {
@@ -98,4 +101,61 @@ public function deleteAnswer($id)
         'message' => 'Answer deleted successfully'
     ]);
 }
+
+public function createUser(Request $request)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:6',
+        'role' => 'required|in:admin,expert',
+        'department' => 'nullable|string',
+        'expertise' => 'nullable|string',
+    ]);
+
+    $user = User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => Hash::make($validated['password']),
+        'role' => $validated['role'],
+        'department' => $validated['department'] ?? null,
+        'expertise' => $validated['expertise'] ?? null,
+        'points' => 0,
+    ]);
+
+    return response()->json([
+        'message' => ucfirst($user->role) . ' created successfully',
+        'user' => $user,
+    ], 201);
+}
+
+public function users()
+{
+    return response()->json(
+        User::select(
+            'id',
+            'name',
+            'email',
+            'role',
+            'department',
+            'expertise',
+            'points',
+            'created_at'
+        )
+        ->latest()
+        ->get()
+    );
+}
+
+public function deleteUser($id)
+{
+    $user = User::findOrFail($id);
+
+    $user->delete();
+
+    return response()->json([
+        'message' => 'User deleted successfully'
+    ]);
+}
+
 }

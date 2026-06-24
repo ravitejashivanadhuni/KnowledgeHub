@@ -1,14 +1,14 @@
 import MainLayout from "../layouts/MainLayout";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../services/api";
 
 function Questions() {
     const [showForm, setShowForm] = useState(false);
     const [questions, setQuestions] = useState([]);
 useEffect(() => {
-  axios
-    .get("http://127.0.0.1:8000/api/questions")
+  api
+    .get("/questions")
     .then((response) => {
       setQuestions(response.data);
     })
@@ -72,17 +72,12 @@ const [newQuestion, setNewQuestion] = useState({
   if (!newQuestion.title || !newQuestion.description) return;
 
   try {
-    await axios.post(
-      "http://127.0.0.1:8000/api/questions",
-      {
-        title: newQuestion.title,
-        description: newQuestion.description,
-      }
-    );
+    await api.post("/questions", {
+      title: newQuestion.title,
+      description: newQuestion.description,
+    });
 
-    const response = await axios.get(
-      "http://127.0.0.1:8000/api/questions"
-    );
+    const response = await api.get("/questions");
 
     setQuestions(response.data);
 

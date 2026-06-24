@@ -77,10 +77,16 @@ export function AuthProvider({ children }) {
     return response.data;
   };
 
-  const logout = () => {
+const logout = async () => {
+    try {
+        await api.post("/logout");
+    } catch (error) {
+        console.log(error);
+    }
+
     localStorage.removeItem("token");
     setUser(null);
-  };
+};
 
   return (
     <AuthContext.Provider

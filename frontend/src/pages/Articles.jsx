@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import MainLayout from "../layouts/MainLayout";
 import { Link } from "react-router-dom";
 
@@ -14,8 +14,8 @@ const [newArticle, setNewArticle] = useState({
 });
 
 const loadArticles = () => {
-  axios
-    .get("http://127.0.0.1:8000/api/articles")
+  api
+    .get("/articles")
     .then((response) => {
       setArticles(response.data);
     })
@@ -97,10 +97,7 @@ useEffect(() => {
         }
 
         try {
-          await axios.post(
-            "http://127.0.0.1:8000/api/articles",
-            newArticle
-          );
+          await api.post("/articles", newArticle);
 
           setNewArticle({
             title: "",
