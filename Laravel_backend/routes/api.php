@@ -40,11 +40,11 @@ Route::post('/login', [AuthController::class, 'login']);
 
 /*
 |--------------------------------------------------------------------------
-| Authenticated Routes
+| Authenticated User Routes
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
@@ -53,6 +53,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     */
 
     Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
     /*
     |--------------------------------------------------------------------------
@@ -61,30 +62,60 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     */
 
     Route::post('/articles', [ArticleController::class, 'store']);
-
     Route::post('/questions', [QuestionController::class, 'store']);
-
     Route::post('/answers', [AnswerController::class, 'store']);
+});
 
-    Route::post('/logout', [AuthController::class, 'logout']);
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+
     /*
     |--------------------------------------------------------------------------
-    | Admin APIs
+    | Dashboard
     |--------------------------------------------------------------------------
     */
 
     Route::get('/admin/stats', [AdminController::class, 'stats']);
 
+    /*
+    |--------------------------------------------------------------------------
+    | Articles
+    |--------------------------------------------------------------------------
+    */
+
     Route::get('/admin/articles', [AdminController::class, 'articles']);
     Route::delete('/admin/articles/{id}', [AdminController::class, 'deleteArticle']);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Questions
+    |--------------------------------------------------------------------------
+    */
 
     Route::get('/admin/questions', [AdminController::class, 'questions']);
     Route::delete('/admin/questions/{id}', [AdminController::class, 'deleteQuestion']);
 
+    /*
+    |--------------------------------------------------------------------------
+    | Answers
+    |--------------------------------------------------------------------------
+    */
+
     Route::get('/admin/answers', [AdminController::class, 'answers']);
     Route::delete('/admin/answers/{id}', [AdminController::class, 'deleteAnswer']);
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Management
+    |--------------------------------------------------------------------------
+    */
+
     Route::post('/admin/users', [AdminController::class, 'createUser']);
     Route::get('/admin/users', [AdminController::class, 'users']);
     Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser']);
-    
 });

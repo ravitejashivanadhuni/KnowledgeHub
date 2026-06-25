@@ -87,8 +87,10 @@ const [newQuestion, setNewQuestion] = useState({
     });
 
     setShowForm(false);
+    alert("Question created successfully!");
   } catch (error) {
     console.error(error);
+    alert("Failed to create question");
   }
 }}
   className="bg-green-600 text-white px-4 py-2 rounded-lg"

@@ -74,6 +74,7 @@ function AdminUsers() {
           (user) => user.id !== id
         )
       );
+      alert("User deleted successfully");
     } catch (error) {
       console.error(
         "Error deleting user:",
@@ -99,6 +100,7 @@ function AdminUsers() {
   }
 
   return (
+    <MainLayout>
     <>
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
@@ -364,6 +366,7 @@ function AdminUsers() {
         </div>
       )}
     </>
+    </MainLayout>
   );
 }
 

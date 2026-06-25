@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import MainLayout from "../layouts/MainLayout";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
   const [showForm, setShowForm] = useState(false);
-
+  const { user } = useAuth();
 const [newArticle, setNewArticle] = useState({
   title: "",
   content: "",
@@ -33,14 +34,16 @@ useEffect(() => {
       <h1 className="text-3xl font-bold mb-6">
         Knowledge Articles
       </h1>
-<div className="mb-6">
-  <button
-    onClick={() => setShowForm(!showForm)}
-    className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-  >
-    Create Article
-  </button>
-</div>
+{(user?.role === "expert" || user?.role === "admin") && (
+  <div className="mb-6">
+    <button
+      onClick={() => setShowForm(!showForm)}
+      className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+    >
+      Create Article
+    </button>
+  </div>
+)}
 {showForm && (
   <div className="bg-white rounded-xl shadow p-5 mb-6">
     <h2 className="text-xl font-semibold mb-4">
@@ -108,8 +111,10 @@ useEffect(() => {
           setShowForm(false);
 
           loadArticles();
+          alert("Article created successfully!");
         } catch (error) {
           console.error(error);
+          alert("Failed to create article");
         }
       }}
       className="bg-green-600 text-white px-4 py-2 rounded-lg"

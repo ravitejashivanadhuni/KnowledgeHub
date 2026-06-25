@@ -1,13 +1,13 @@
 import MainLayout from "../layouts/MainLayout";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function Experts() {
     const [search, setSearch] = useState("");
 const [experts, setExperts] = useState([]);
 
 useEffect(() => {
-  axios
+  api
     .get("http://127.0.0.1:8000/api/experts")
     .then((response) => {
       setExperts(response.data);
@@ -16,7 +16,6 @@ useEffect(() => {
       console.error(error);
     });
 }, []);
-
 const filteredExperts = experts.filter((expert) =>
   expert.name.toLowerCase().includes(search.toLowerCase()) ||
   expert.expertise.toLowerCase().includes(search.toLowerCase())
@@ -53,10 +52,6 @@ const filteredExperts = experts.filter((expert) =>
             <p className="mt-3 font-medium">
               ⭐ {expert.points} Points
             </p>
-
-            <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg">
-              View Profile
-            </button>
           </div>
         ))}
       </div>

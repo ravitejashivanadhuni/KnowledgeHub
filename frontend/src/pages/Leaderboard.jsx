@@ -1,12 +1,12 @@
 import MainLayout from "../layouts/MainLayout";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function Leaderboard() {
   const [experts, setExperts] = useState([]);
 
   useEffect(() => {
-    axios
+    api
       .get("http://127.0.0.1:8000/api/experts")
       .then((response) => {
         setExperts(response.data);

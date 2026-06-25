@@ -40,11 +40,6 @@ function Sidebar() {
           </div>
         </Link>
 
-        <Link to="/leaderboard">
-          <div className="p-3 rounded-lg hover:bg-slate-800 cursor-pointer">
-            Leaderboard
-          </div>
-        </Link>
 {user?.role === "admin" && (
   <Link
     to="/admin"

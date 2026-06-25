@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import StatCard from "../components/Statcard";
 import experts from "../data/experts";
 import articles from "../data/articles";
@@ -18,7 +18,7 @@ const { user, loading } = useAuth();
 console.log("User:", user);
 console.log("Loading:", loading);
 useEffect(() => {
-  axios
+  api
     .get("http://127.0.0.1:8000/api/dashboard")
     .then((response) => {
       setStats(response.data);

@@ -1,7 +1,7 @@
 import MainLayout from "../layouts/MainLayout";
 import StatCard from "../components/StatCard";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -14,8 +14,8 @@ function AdminDashboard() {
 const [articles, setArticles] = useState([]);
 const [questions, setQuestions] = useState([]);
 const loadArticles = () => {
-  axios
-    .get("http://127.0.0.1:8000/api/admin/articles")
+  api
+    .get("/admin/articles")
     .then((response) => {
       setArticles(response.data);
     })
@@ -24,8 +24,8 @@ const loadArticles = () => {
     });
 };
 const loadQuestions = () => {
-  axios
-    .get("http://127.0.0.1:8000/api/admin/questions")
+  api
+    .get("/admin/questions")
     .then((response) => {
       setQuestions(response.data);
     })
@@ -34,8 +34,8 @@ const loadQuestions = () => {
     });
 };
 useEffect(() => {
-  axios
-    .get("http://127.0.0.1:8000/api/admin/stats")
+  api
+    .get("/admin/stats")
     .then((response) => {
       setStats(response.data);
     })
@@ -63,7 +63,7 @@ loadQuestions();
 
       <div className="mt-8 bg-white rounded-xl shadow p-6">
         <h2 className="text-xl font-semibold mb-4">
-          Pending Content Review
+          Manage Articles
         </h2>
 
 <div className="space-y-3">
@@ -85,11 +85,12 @@ loadQuestions();
 <button
   onClick={async () => {
     try {
-      await axios.delete(
-        `http://127.0.0.1:8000/api/admin/articles/${article.id}`
+      await api.delete(
+        `/admin/articles/${article.id}`
       );
 
       loadArticles();
+      alert("Article deleted successfully!");
     } catch (error) {
       console.error(error);
     }
@@ -126,11 +127,12 @@ loadQuestions();
         <button
           onClick={async () => {
             try {
-              await axios.delete(
-                `http://127.0.0.1:8000/api/admin/questions/${question.id}`
+              await api.delete(
+                `/admin/questions/${question.id}`
               );
 
               loadQuestions();
+              alert("Question deleted successfully!");
             } catch (error) {
               console.error(error);
             }

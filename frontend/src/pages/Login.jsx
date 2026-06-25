@@ -22,7 +22,7 @@ function Login() {
 
     try {
       await login(formData);
-
+      alert("Login successful!");
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
