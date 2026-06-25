@@ -4,7 +4,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 const AuthContext = createContext();
 
@@ -23,12 +23,10 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/me",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await api.get("/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         }
       );
 
@@ -48,10 +46,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const register = async (formData) => {
-    const response = await axios.post(
-      "http://127.0.0.1:8000/api/register",
-      formData
-    );
+    const response = await api.post("/register", formData);
 
     const { token, user } = response.data;
 
@@ -63,10 +58,7 @@ export function AuthProvider({ children }) {
   };
 
   const login = async (formData) => {
-    const response = await axios.post(
-      "http://127.0.0.1:8000/api/login",
-      formData
-    );
+    const response = await api.post("/login", formData);
 
     const { token, user } = response.data;
 
