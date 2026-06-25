@@ -19,7 +19,7 @@ console.log("User:", user);
 console.log("Loading:", loading);
 useEffect(() => {
   api
-    .get("http://127.0.0.1:8000/api/dashboard")
+    .get("/dashboard")
     .then((response) => {
       setStats(response.data);
     })

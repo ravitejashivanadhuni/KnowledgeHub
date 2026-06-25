@@ -7,7 +7,7 @@ function Leaderboard() {
 
   useEffect(() => {
     api
-      .get("http://127.0.0.1:8000/api/experts")
+      .get("/experts")
       .then((response) => {
         setExperts(response.data);
       })
