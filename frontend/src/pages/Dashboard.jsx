@@ -41,32 +41,6 @@ useEffect(() => {
 <StatCard title="Experts" value={stats.experts} />
             </div>
             <div className="mt-8">
-                <h2 className="text-2xl font-semibold mb-4">
-                    Top Experts
-                </h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {experts.map((expert) => (
-                        <div
-                            key={expert.id}
-                            className="bg-white rounded-xl shadow p-4"
-                        >
-                            <h3 className="font-semibold text-lg">
-                                {expert.name}
-                            </h3>
-
-                            <p className="text-gray-600">
-                                {expert.expertise}
-                            </p>
-
-                            <p className="mt-2 font-medium">
-                                ⭐ {expert.points} Points
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <div className="mt-8">
   <h2 className="text-2xl font-semibold mb-4">
     Recent Knowledge Articles
   </h2>
