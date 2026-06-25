@@ -8,7 +8,7 @@ return [
 
     'allowed_origins' => [
         'http://localhost:5173',
-        'https://knowledge-hub-wine.vercel.app', // Replace after deployment
+        'https://knowledge-7w53ljczv-ravitejas-projects-039d4d96.vercel.app', // Replace after deployment
     ],
 
     'allowed_origins_patterns' => [],
