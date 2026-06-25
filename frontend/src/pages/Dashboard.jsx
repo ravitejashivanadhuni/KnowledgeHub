@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import StatCard from "../components/Statcard";
+import StatCard from "../components/StatCard";
 import experts from "../data/experts";
 import articles from "../data/articles";
 import Sidebar from "../components/Sidebar";
